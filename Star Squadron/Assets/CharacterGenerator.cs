@@ -15,15 +15,15 @@ public class CharacterGenerator : MonoBehaviour
     {
         
     }
-    public void GenerateName()
+    public void GenerateNPC()
     {
         string[] FirstNameList = new string[13] {"Wally", "Nyssa", "Xena", "Varina", "Geneva", "Astrid", "Fae", "Phoebe", "Ethan", "Alan", "Shae", "Harper", "Jace"};
         string[] TitleList = new string[7] {"the Destroyer", "the Wise", "the III", "the Blind", "the Friend", "the Bitch ASS", "the Lesser"};
 
-        string FirstName = FirstNameList[Random.Range(0, FirstNameList.Length)];
-        string NameTitle = TitleList[Random.Range(0, TitleList.Length)];
-        string mercenaryName = FirstName + " " + NameTitle;
+        NPC npc = new NPC();
+        npc.setFirstName(FirstNameList[Random.Range(0, FirstNameList.Length)]);
+        npc.setTitle(TitleList[Random.Range(0, TitleList.Length)]);
 
-        Debug.Log(mercenaryName);
+        Debug.Log(npc.toString());
     }
 }

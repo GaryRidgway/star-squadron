@@ -50,7 +50,7 @@ public class NPC {
 	}
 
     public string toString() {
-        return FirstName + LastName + Title;
+        return FirstName + " " + Title;
     }
 
 }
