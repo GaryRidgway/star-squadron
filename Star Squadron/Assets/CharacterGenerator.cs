@@ -17,22 +17,16 @@ public class CharacterGenerator : MonoBehaviour
     }
     public void GenerateName()
     {
-        string[] maleNames = new string[1] {"wally"};
-        string[] femaleNames = new string[4] { "abby", "abigail", "adele", "adrian"};
-        string[] lastNames = new string[5] { "abbott", "acosta", "adams", "adkins", "aguilar"};
-        
+        string[] FirstNameList = new string[1] {"Wally", "Nyssa", "Xena", "Varina", "Geneva", "Astrid", "Fae", "Phoebe", "Ethan", "Alan", "Shae", "Harper", "Jace"};
+        string[] TitleList = new string[5] {"the Destroyer", "the Wise", "the III", "the Blind", "the Friend", "the Bitch ASS", "the Lesser"};
+
         string FirstName;
 
-        int rand = Random.Range(0,2);
-        if (rand == 0)
-        {
-            FirstName = maleNames[Random.Range(0, maleNames.Length)];
-        }
-        else
-        {
-            FirstName = femaleNames[Random.Range(0, femaleNames.Length)];
-        }
+        FirstName = FirstNameList[Random.Range(0, FirstNameList.Length)];
+        NameTitle = TitleList[Random.Range(0, TitleList.Length)];
 
-        Debug.Log(FirstName);
+        string mercenaryName = FirstName + " " + NameTitle;
+
+        Debug.Log(mercenaryName);
     }
 }
