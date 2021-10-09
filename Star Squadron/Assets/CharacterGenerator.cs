@@ -17,8 +17,8 @@ public class CharacterGenerator : MonoBehaviour
     }
     public void GenerateName()
     {
-        string[] FirstNameList = new string[1] {"Wally", "Nyssa", "Xena", "Varina", "Geneva", "Astrid", "Fae", "Phoebe", "Ethan", "Alan", "Shae", "Harper", "Jace"};
-        string[] TitleList = new string[5] {"the Destroyer", "the Wise", "the III", "the Blind", "the Friend", "the Bitch ASS", "the Lesser"};
+        string[] FirstNameList = new string[13] {"Wally", "Nyssa", "Xena", "Varina", "Geneva", "Astrid", "Fae", "Phoebe", "Ethan", "Alan", "Shae", "Harper", "Jace"};
+        string[] TitleList = new string[7] {"the Destroyer", "the Wise", "the III", "the Blind", "the Friend", "the Bitch ASS", "the Lesser"};
 
         string FirstName;
 
