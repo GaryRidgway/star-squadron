@@ -49,6 +49,22 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""GoForward"",
+                    ""type"": ""Button"",
+                    ""id"": ""401583b9-8f11-4a70-8cde-acbba57cf161"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""GoBackward"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ff23643-0258-4cdb-8468-80f30b1308b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -95,6 +111,28 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Accelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""403c15f3-446c-4a72-98fd-ba943ae01338"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b95fce5-bd38-441c-b016-dfd979084665"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoBackward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -107,6 +145,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ShipControls_RotateLeft = m_ShipControls.FindAction("RotateLeft", throwIfNotFound: true);
         m_ShipControls_MouseMove = m_ShipControls.FindAction("MouseMove", throwIfNotFound: true);
         m_ShipControls_Accelerate = m_ShipControls.FindAction("Accelerate", throwIfNotFound: true);
+        m_ShipControls_GoForward = m_ShipControls.FindAction("GoForward", throwIfNotFound: true);
+        m_ShipControls_GoBackward = m_ShipControls.FindAction("GoBackward", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,6 +200,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_ShipControls_RotateLeft;
     private readonly InputAction m_ShipControls_MouseMove;
     private readonly InputAction m_ShipControls_Accelerate;
+    private readonly InputAction m_ShipControls_GoForward;
+    private readonly InputAction m_ShipControls_GoBackward;
     public struct ShipControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -168,6 +210,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @RotateLeft => m_Wrapper.m_ShipControls_RotateLeft;
         public InputAction @MouseMove => m_Wrapper.m_ShipControls_MouseMove;
         public InputAction @Accelerate => m_Wrapper.m_ShipControls_Accelerate;
+        public InputAction @GoForward => m_Wrapper.m_ShipControls_GoForward;
+        public InputAction @GoBackward => m_Wrapper.m_ShipControls_GoBackward;
         public InputActionMap Get() { return m_Wrapper.m_ShipControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +233,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Accelerate.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnAccelerate;
                 @Accelerate.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnAccelerate;
                 @Accelerate.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnAccelerate;
+                @GoForward.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoForward;
+                @GoForward.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoForward;
+                @GoForward.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoForward;
+                @GoBackward.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoBackward;
+                @GoBackward.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoBackward;
+                @GoBackward.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoBackward;
             }
             m_Wrapper.m_ShipControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -205,6 +255,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Accelerate.started += instance.OnAccelerate;
                 @Accelerate.performed += instance.OnAccelerate;
                 @Accelerate.canceled += instance.OnAccelerate;
+                @GoForward.started += instance.OnGoForward;
+                @GoForward.performed += instance.OnGoForward;
+                @GoForward.canceled += instance.OnGoForward;
+                @GoBackward.started += instance.OnGoBackward;
+                @GoBackward.performed += instance.OnGoBackward;
+                @GoBackward.canceled += instance.OnGoBackward;
             }
         }
     }
@@ -215,5 +271,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnRotateLeft(InputAction.CallbackContext context);
         void OnMouseMove(InputAction.CallbackContext context);
         void OnAccelerate(InputAction.CallbackContext context);
+        void OnGoForward(InputAction.CallbackContext context);
+        void OnGoBackward(InputAction.CallbackContext context);
     }
 }

@@ -9,6 +9,8 @@ public class SC_SpaceshipController : MonoBehaviour
 {
     public float normalSpeed = 25f;
     public float accelerationSpeed = 45f;
+    [Range(0.0F, 1.0F)]
+    public float acceleratability = 0.5f;
     public Transform cameraPosition;
     public Camera mainCamera;
     public Transform spaceshipRoot;
@@ -29,6 +31,9 @@ public class SC_SpaceshipController : MonoBehaviour
     private bool rotateLeft = false;
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
+    private bool isForwardHeld = false;
+    private bool isBackwardHeld = false;
+    private float speedModifier = 1f;
 
     void Awake () {
         playerInput = new PlayerInput();
@@ -45,6 +50,15 @@ public class SC_SpaceshipController : MonoBehaviour
 
         playerInput.ShipControls.Accelerate.started += onAccelerate;
         playerInput.ShipControls.Accelerate.canceled += onAccelerate;
+
+
+        playerInput.ShipControls.GoForward.started += onGoForward;
+        playerInput.ShipControls.GoForward.canceled += onGoForward;
+        playerInput.ShipControls.GoForward.performed += onGoForward;
+
+        playerInput.ShipControls.GoBackward.started += onGoBackward;
+        playerInput.ShipControls.GoBackward.canceled += onGoBackward;
+        playerInput.ShipControls.GoBackward.performed += onGoBackward;
     }
 
     // Start is called before the first frame update
@@ -62,14 +76,28 @@ public class SC_SpaceshipController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isForwardHeld && speedModifier < 1) {
+            speedModifier += 0.1f * acceleratability;
+            if (speedModifier > 1) {
+                speedModifier = 1;
+            }
+        }
+
+        if (isBackwardHeld && speedModifier > -1) {
+            speedModifier -= 0.1f * acceleratability;
+            if (speedModifier < -1) {
+                speedModifier = -1;
+            }
+        }
+        
         //Press Right Mouse Button to accelerate
         if (accelerate)
         {
-            speed = Mathf.Lerp(speed, accelerationSpeed, Time.deltaTime * 3);
+            speed = Mathf.Lerp(speed, accelerationSpeed * speedModifier, Time.deltaTime * 3);
         }
         else
         {
-            speed = Mathf.Lerp(speed, normalSpeed, Time.deltaTime * 10);
+            speed = Mathf.Lerp(speed, normalSpeed * speedModifier, Time.deltaTime * 10);
         }
 
         //Set moveDirection to the vertical axis (up and down keys) * speed
@@ -125,6 +153,24 @@ public class SC_SpaceshipController : MonoBehaviour
 
     void onRotateRight (InputAction.CallbackContext context) {
         rotateRight = context.ReadValueAsButton();
+    }
+
+    void onGoForward (InputAction.CallbackContext context) {
+        if (context.ReadValueAsButton()) {
+            isForwardHeld = true;
+        }
+        else {
+            isForwardHeld = false;
+        }
+    }
+
+    void onGoBackward (InputAction.CallbackContext context) {
+        if (context.ReadValueAsButton()) {
+            isBackwardHeld = true;
+        }
+        else {
+            isBackwardHeld = false;
+        }
     }
 
     void OnEnable() {

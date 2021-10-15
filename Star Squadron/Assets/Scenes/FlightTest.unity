@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2024.294, g: 1990.4414, b: 2397.5312, a: 1}
+  m_IndirectSpecularColor: {r: 2028.9883, g: 2000.7969, b: 2420.1875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotTransform: {fileID: 411591959}
-  MainShiptransform: {fileID: 0}
+  MainShiptransform: {fileID: 991472840}
   TravelTo: {fileID: 516417645}
   Travel: 0
   PositionLerpSpeed: 3
@@ -4210,9 +4210,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 25
   accelerationSpeed: 45
+  acceleratability: 0.525
   cameraPosition: {fileID: 32213463}
   mainCamera: {fileID: 1823688466}
-  spaceshipRoot: {fileID: 0}
+  spaceshipRoot: {fileID: 991472840}
   rotationSpeed: 2
   cameraSmooth: 4
   crosshairTexture: {fileID: 1009830532}
