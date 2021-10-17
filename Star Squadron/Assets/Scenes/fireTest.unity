@@ -430,6 +430,7 @@ MonoBehaviour:
   heatPerRound: 1
   heatReducePerSecond: 3
   mandatoryCooldown: 0
+  fireRate: 2
 --- !u!4 &704741464
 Transform:
   m_ObjectHideFlags: 0
@@ -1249,7 +1250,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 704741463}
         m_TargetAssemblyTypeName: weapon, Assembly-CSharp
-        m_MethodName: fireProjectile
+        m_MethodName: toggleHoldFire
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -17,9 +17,13 @@ public class weapon : MonoBehaviour
     [SerializeField]
     private float heatPerRound = 1f;
     [SerializeField]
-    private float heatReducePerSecond = 1f;
+    private float heatReducePerSecond = 3f;
     [SerializeField]
     private bool mandatoryCooldown = false;
+    [SerializeField]
+    private float fireRate = 6f;
+    private bool holdFire = false;
+    private float timeToFire = 0;
 
     public void Update() {
         heat = Mathf.Max(heat - (heatReducePerSecond * Time.deltaTime), 0f) ;
@@ -31,6 +35,11 @@ public class weapon : MonoBehaviour
         if (mandatoryCooldown && heat == 0f) {
             mandatoryCooldown = false;
         }
+
+        if (holdFire && Time.time >= timeToFire) {
+            fireProjectile();
+            timeToFire = Time.time + 1/fireRate;
+        }
     }
 
     public void fireProjectile() {
@@ -40,5 +49,9 @@ public class weapon : MonoBehaviour
             firedProjectile.transform.rotation = firePoint.rotation;
             heat += heatPerRound;
         }
+    }
+
+    public void toggleHoldFire() {
+        holdFire = holdFire ? false : true;
     }
 }

@@ -17,6 +17,7 @@ public class SC_SpaceshipController : MonoBehaviour
     public float rotationSpeed = 2.0f;
     public float cameraSmooth = 4f;
     public RectTransform crosshairTexture;
+    public List<weapon> weapons;
 
     float speed;
     Rigidbody r;
@@ -59,6 +60,9 @@ public class SC_SpaceshipController : MonoBehaviour
         playerInput.ShipControls.GoBackward.started += onGoBackward;
         playerInput.ShipControls.GoBackward.canceled += onGoBackward;
         playerInput.ShipControls.GoBackward.performed += onGoBackward;
+
+        playerInput.ShipControls.FireWeapons.started += onFireWeapons;
+        playerInput.ShipControls.FireWeapons.canceled += onFireWeapons;
     }
 
     // Start is called before the first frame update
@@ -170,6 +174,12 @@ public class SC_SpaceshipController : MonoBehaviour
         }
         else {
             isBackwardHeld = false;
+        }
+    }
+
+    void onFireWeapons(InputAction.CallbackContext context) {
+        foreach( weapon shipWeapon in weapons) {
+            shipWeapon.toggleHoldFire();
         }
     }
 

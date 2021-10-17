@@ -65,6 +65,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FireWeapons"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb933cb8-9b6c-4c86-aef6-79b517835693"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -133,6 +141,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""GoBackward"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""795d9389-931e-460e-bc56-7be6b8af15b0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -147,6 +166,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_ShipControls_Accelerate = m_ShipControls.FindAction("Accelerate", throwIfNotFound: true);
         m_ShipControls_GoForward = m_ShipControls.FindAction("GoForward", throwIfNotFound: true);
         m_ShipControls_GoBackward = m_ShipControls.FindAction("GoBackward", throwIfNotFound: true);
+        m_ShipControls_FireWeapons = m_ShipControls.FindAction("FireWeapons", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -202,6 +222,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_ShipControls_Accelerate;
     private readonly InputAction m_ShipControls_GoForward;
     private readonly InputAction m_ShipControls_GoBackward;
+    private readonly InputAction m_ShipControls_FireWeapons;
     public struct ShipControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -212,6 +233,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Accelerate => m_Wrapper.m_ShipControls_Accelerate;
         public InputAction @GoForward => m_Wrapper.m_ShipControls_GoForward;
         public InputAction @GoBackward => m_Wrapper.m_ShipControls_GoBackward;
+        public InputAction @FireWeapons => m_Wrapper.m_ShipControls_FireWeapons;
         public InputActionMap Get() { return m_Wrapper.m_ShipControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -239,6 +261,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GoBackward.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoBackward;
                 @GoBackward.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoBackward;
                 @GoBackward.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnGoBackward;
+                @FireWeapons.started -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnFireWeapons;
+                @FireWeapons.performed -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnFireWeapons;
+                @FireWeapons.canceled -= m_Wrapper.m_ShipControlsActionsCallbackInterface.OnFireWeapons;
             }
             m_Wrapper.m_ShipControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -261,6 +286,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GoBackward.started += instance.OnGoBackward;
                 @GoBackward.performed += instance.OnGoBackward;
                 @GoBackward.canceled += instance.OnGoBackward;
+                @FireWeapons.started += instance.OnFireWeapons;
+                @FireWeapons.performed += instance.OnFireWeapons;
+                @FireWeapons.canceled += instance.OnFireWeapons;
             }
         }
     }
@@ -273,5 +301,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnAccelerate(InputAction.CallbackContext context);
         void OnGoForward(InputAction.CallbackContext context);
         void OnGoBackward(InputAction.CallbackContext context);
+        void OnFireWeapons(InputAction.CallbackContext context);
     }
 }
