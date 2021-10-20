@@ -14,14 +14,22 @@ public class enemyAI : MonoBehaviour
     private float handlingPenalty = 3f;
     [SerializeField]
     private float followDistance = 4f;
+    [SerializeField]
+    private float sensorDistance = 40f;
 
     private float distanceTraveled = 0f;
-    private
 
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = new Color(255, 255, 255, 0.2f);
+        Gizmos.DrawSphere(transform.position, sensorDistance);
     }
 
     void LateUpdate() {

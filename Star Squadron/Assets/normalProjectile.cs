@@ -10,11 +10,13 @@ public class normalProjectile : MonoBehaviour
     private float lifetime = 10f;
     [SerializeField]
     private string collisionTag = "Enemy";
+    public Collider shipIgnoreCollider;
+    public float damage;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Physics.IgnoreCollision(shipIgnoreCollider, GetComponent<Collider>());
     }
 
     // Update is called once per frame
@@ -33,6 +35,11 @@ public class normalProjectile : MonoBehaviour
     void OnCollisionEnter(Collision co) {
         if (co.gameObject.tag == collisionTag) {  
             speed = 0f;
+
+            if (co.gameObject.TryGetComponent(out healthBar healthBar))
+        {
+            healthBar.damage(damage);
+        }
 
             Destroy(gameObject);
         }

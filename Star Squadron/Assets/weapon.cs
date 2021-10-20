@@ -11,6 +11,10 @@ public class weapon : MonoBehaviour
     [SerializeField]
     private Transform projectiles;
     [SerializeField]
+    private Collider shipIgnoreCollider;
+    [SerializeField]
+    private float weaponDamage = 10f;
+    [SerializeField]
     private float heat = 0f;
     [SerializeField]
     private float maxheat = 10f;
@@ -47,6 +51,9 @@ public class weapon : MonoBehaviour
             GameObject firedProjectile = Instantiate(projectile, projectiles);
             firedProjectile.transform.position = firePoint.position;
             firedProjectile.transform.rotation = firePoint.rotation;
+            normalProjectile nProjectile = firedProjectile.GetComponent<normalProjectile>();
+            nProjectile.shipIgnoreCollider = shipIgnoreCollider;
+            nProjectile.damage = weaponDamage;
             heat += heatPerRound;
         }
     }
