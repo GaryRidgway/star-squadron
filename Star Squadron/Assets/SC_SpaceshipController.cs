@@ -178,9 +178,7 @@ public class SC_SpaceshipController : MonoBehaviour
     }
 
     void onFireWeapons(InputAction.CallbackContext context) {
-        foreach( weapon shipWeapon in weapons) {
-            shipWeapon.toggleHoldFire();
-        }
+        ExtensionMethods.fireWeapons(weapons);
     }
 
     void OnEnable() {

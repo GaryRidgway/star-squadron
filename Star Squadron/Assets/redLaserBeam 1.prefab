@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: de153c2ccf3797842880c88a71bc8959, type: 2}
+  - {fileID: 2100000, guid: f256e9f23c50bee48ae8e2c58bfb5ec5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5414613504171900624}
   - component: {fileID: 2053931159721093372}
   m_Layer: 0
-  m_Name: laserBeam
+  m_Name: redLaserBeam 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   lifetime: 10
   collisionTag: Enemy
   shipIgnoreCollider: {fileID: 0}
+  damage: 0
 --- !u!54 &5414613504171900624
 Rigidbody:
   m_ObjectHideFlags: 0

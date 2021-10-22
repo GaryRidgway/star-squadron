@@ -16,8 +16,13 @@ public class enemyAI : MonoBehaviour
     private float followDistance = 4f;
     [SerializeField]
     private float sensorDistance = 40f;
+    [SerializeField]
+    private float fireDistance = 60f;
+    [SerializeField]
+    private List<weapon> weapons;
 
     private float distanceTraveled = 0f;
+    private float lastDisance = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +38,8 @@ public class enemyAI : MonoBehaviour
     }
 
     void LateUpdate() {
-        if (Vector3.Distance(target.position, transform.position) > followDistance) {
+        float distanceToTarget = Vector3.Distance(target.position, transform.position);
+        if (distanceToTarget > followDistance) {
 
             Vector3 lookRotation = target.position - transform.position;
             float angleToTarget = Mathf.Abs(Vector3.Angle(transform.forward, lookRotation));
@@ -64,5 +70,16 @@ public class enemyAI : MonoBehaviour
                 transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, str);
             }
         }
+
+        if (distanceToTarget <= fireDistance) {
+            ExtensionMethods.setFireWeapons(weapons, true);
+        }
+        else if (distanceToTarget > fireDistance) {
+            ExtensionMethods.setFireWeapons(weapons, false);
+        }
+
+
+        // Do this last.
+        lastDisance = distanceToTarget;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2035.1924, g: 2013.9414, b: 2451.0234, a: 1}
+  m_IndirectSpecularColor: {r: 2029.7373, g: 2002.0664, b: 2423.1836, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 16248685}
   - component: {fileID: 16248684}
+  - component: {fileID: 16248686}
   m_Layer: 0
   m_Name: Rammer
   m_TagString: Untagged
@@ -157,7 +158,11 @@ MonoBehaviour:
   speed: 10
   handlingPenalty: 6
   followDistance: 4
-  sensorDistance: 40
+  sensorDistance: 100
+  fireDistance: 60
+  weapons:
+  - {fileID: 1310179696}
+  - {fileID: 1535078479}
 --- !u!4 &16248685
 Transform:
   m_ObjectHideFlags: 0
@@ -172,9 +177,24 @@ Transform:
   - {fileID: 1823688467}
   - {fileID: 1632147440}
   - {fileID: 617297488}
+  - {fileID: 1310179697}
+  - {fileID: 1535078480}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &16248686
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16248683}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.88, y: 0.82, z: 2.9}
+  m_Center: {x: 0, y: 0, z: -0.24}
 --- !u!1 &157207112
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +534,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2a1205f114c9e469cf6f3e5cf06e3a, type: 3}
+--- !u!1 &1310179695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1310179697}
+  - component: {fileID: 1310179696}
+  m_Layer: 0
+  m_Name: rightBlaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1310179696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310179695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05326f6ff725e9e49b0575fcc24b0ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 4200078686950615349, guid: 690c1fd0c66246141b11787dca2b1642, type: 3}
+  firePoint: {fileID: 1310179697}
+  projectiles: {fileID: 1743988119}
+  shipIgnoreCollider: {fileID: 16248686}
+  weaponDamage: 10
+  heat: 0
+  maxheat: 10
+  heatPerRound: 1
+  heatReducePerSecond: 3
+  mandatoryCooldown: 0
+  fireRate: 6
+--- !u!4 &1310179697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310179695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3417, y: -0.132, z: 1.087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 16248685}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1474322537
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,11 +684,95 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474322537}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1535078478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1535078480}
+  - component: {fileID: 1535078479}
+  m_Layer: 0
+  m_Name: leftBlaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1535078479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535078478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05326f6ff725e9e49b0575fcc24b0ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 4200078686950615349, guid: 690c1fd0c66246141b11787dca2b1642, type: 3}
+  firePoint: {fileID: 1535078480}
+  projectiles: {fileID: 1743988119}
+  shipIgnoreCollider: {fileID: 16248686}
+  weaponDamage: 10
+  heat: 0
+  maxheat: 10
+  heatPerRound: 1
+  heatReducePerSecond: 3
+  mandatoryCooldown: 0
+  fireRate: 6
+--- !u!4 &1535078480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535078478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.3417, y: -0.132, z: 1.087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 16248685}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1632147440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4f2a1205f114c9e469cf6f3e5cf06e3a, type: 3}
   m_PrefabInstance: {fileID: 826093851}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1743988118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743988119}
+  m_Layer: 0
+  m_Name: projectiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1743988119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743988118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 49.781055, y: -59.559338, z: -19.95845}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1823688464
 GameObject:
   m_ObjectHideFlags: 0

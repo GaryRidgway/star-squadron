@@ -61,4 +61,8 @@ public class weapon : MonoBehaviour
     public void toggleHoldFire() {
         holdFire = holdFire ? false : true;
     }
+
+    public void setHoldFire(bool doFire) {
+        holdFire = doFire;
+    }
 }
